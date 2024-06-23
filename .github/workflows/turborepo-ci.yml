@@ -7,9 +7,6 @@ on:
       - './turbo'
   workflow_dispatch:
 
-env:
-  WORKFLOW_VARIABLE: WORKFLOW
-
 jobs:
   build:
     name: Build and Test
@@ -31,8 +28,6 @@ jobs:
         with:
           path: .turbo
           key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
 
       - name: Setup Pnpm
         uses: pnpm/action-setup@v3
