@@ -47,4 +47,4 @@ jobs:
           server-token: ${{ secrets.TURBO_TOKEN }}
 
       - name: Build
-        run: yarn build --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_TOKEN }}" --team="${{ vars.TURBO_TEAM }}"
+        run: pnpm --filter=web... run build --api="http://127.0.0.1:9080" --token="${{ secrets.TURBO_TOKEN }}" --team="${{ vars.TURBO_TEAM }}"
