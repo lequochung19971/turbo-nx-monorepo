@@ -6,7 +6,7 @@ import { Button } from '@repo/ui';
 export default function Home() {
   return (
     <div className={styles.page}>
-      Test Test Test Test Test 2
+      Test Test Test Test Test 3
       <Test />
       <main className={styles.main}>
         <Image
