@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 2
 
       - name: Debug - List directory contents
-        run: ls -l turbo
+        run: ls -l
 
       - name: Setup Pnpm
         uses: pnpm/action-setup@v3
