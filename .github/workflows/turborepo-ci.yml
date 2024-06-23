@@ -23,14 +23,6 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ hashFiles('.turbo/**') }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
       - name: Setup Pnpm
         uses: pnpm/action-setup@v3
         with:
@@ -42,6 +34,14 @@ jobs:
           node-version: 20
           cache: 'pnpm'
           cache-dependency-path: ./turbo/pnpm-lock.yaml
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - name: Install dependencies
         run: pnpm install
