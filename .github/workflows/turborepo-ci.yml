@@ -40,6 +40,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Log secrets and vars
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+        run: |
+          echo "Using secret token: $TURBO_TOKEN"
+          echo "Using vars token: $TURBO_TEAM"
+
       - name: Turborepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
         with:
