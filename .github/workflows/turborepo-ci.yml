@@ -51,7 +51,7 @@ jobs:
           server-token: ${{ secrets.TURBO_TOKEN }}
 
       - name: Build
-        run: pnpm --filter=web... run build
+        run: pnpm turbo run build --filter=web...
         env:
           TURBO_API: 'http://127.0.0.1:9080'
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
