@@ -7,6 +7,9 @@ on:
       - '**'
   workflow_dispatch:
 
+env:
+  WORKFLOW_VARIABLE: WORKFLOW
+
 jobs:
   build:
     name: Build and Test
@@ -42,13 +45,11 @@ jobs:
 
       - name: Log secrets and vars
         env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TURBO_TOKEN: ${{ env.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ env.TURBO_TEAM }}
         run: |
           echo "Using secret token: $TURBO_TOKEN"
           echo "Using vars token: $TURBO_TEAM"
-          echo "Using github token: $GITHUB_TOKEN"
 
       - name: Turborepo local server
         uses: felixmosh/turborepo-gh-artifacts@v2
