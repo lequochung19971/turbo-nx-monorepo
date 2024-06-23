@@ -4,7 +4,7 @@ on:
   push:
     branches: ['main']
     paths:
-      - './turbo'
+      - 'turbo/**'
   workflow_dispatch:
 
 jobs:
@@ -35,25 +35,18 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: ./turbo/pnpm-lock.yaml
 
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: ./apps
-          key: ${{ runner.os }}-apps-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-apps-
-
       - name: Install dependencies
         run: pnpm install
 
-      # - name: Turborepo local server
-      #   uses: felixmosh/turborepo-gh-artifacts@v2
-      #   with:
-      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
-      #     server-token: ${{ secrets.TURBO_TOKEN }}
+      - name: Turborepo local server
+        uses: felixmosh/turborepo-gh-artifacts@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          server-token: ${{ secrets.TURBO_TOKEN }}
+
       - name: Build
         run: pnpm turbo run build --filter=web...
-        # env:
-        #   TURBO_API: 'http://127.0.0.1:9080'
-        #   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        #   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+        env:
+          TURBO_API: 'http://127.0.0.1:9080'
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
